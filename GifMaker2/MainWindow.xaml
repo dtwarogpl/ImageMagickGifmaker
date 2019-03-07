@@ -4,9 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GifMaker2"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="GifMaker" Height="450" Width="500">
+    <Grid AllowDrop="True" Drop="UIElement_OnDrop">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+        </Grid.RowDefinitions>
+
+       
+
+        <TextBlock HorizontalAlignment="Center" Grid.Row="0" VerticalAlignment="Center" FontSize="20" FontFamily="Tahoma" Foreground="#FF4D4D4D" Name="TextBlock" Padding="100" Background="#FFF7F7F7">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="91" ShadowDepth="1" Direction="308" Opacity="0.37" />
+            </TextBlock.Effect>
+            Drop files here</TextBlock>
+       <ProgressBar Grid.Row="0"  Name="Working" Height="10px"  Width="200" Visibility="Collapsed" IsIndeterminate="True" Foreground="#FF4D4D4D" BorderBrush="{x:Null}"></ProgressBar>
     </Grid>
+   
 </Window>

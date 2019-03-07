@@ -8,22 +8,78 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GifMaker2.Properties
-{
-
-
+namespace GifMaker2.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
-        public static Settings Default
-        {
-            get
-            {
+        
+        public static Settings Default {
+            get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\ImageMagick-7.0.6-Q16\\magick.exe")]
+        public string ImageMagickPath {
+            get {
+                return ((string)(this["ImageMagickPath"]));
+            }
+            set {
+                this["ImageMagickPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int FrameDelay {
+            get {
+                return ((int)(this["FrameDelay"]));
+            }
+            set {
+                this["FrameDelay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1200x")]
+        public string Resize {
+            get {
+                return ((string)(this["Resize"]));
+            }
+            set {
+                this["Resize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("80")]
+        public string Quality {
+            get {
+                return ((string)(this["Quality"]));
+            }
+            set {
+                this["Quality"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public string Fuzz {
+            get {
+                return ((string)(this["Fuzz"]));
+            }
+            set {
+                this["Fuzz"] = value;
             }
         }
     }
