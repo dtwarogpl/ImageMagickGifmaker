@@ -23,25 +23,29 @@ namespace GifMaker2
     public partial class MainWindow : Window
     {
         private readonly Properties.Settings _settings = Properties.Settings.Default;
+        private readonly ViewModel _viewModel = new ViewModel();
         public MainWindow()
         {
             InitializeComponent();
-
-            if(!File.Exists(Path.Combine(_settings.ImageMagickPath)))
-            {
-                MessageBox.Show($"Nie odnaleziono pliku wykonywalnego biblioteki ImageMagick \r\n Zdefiniowana ściezka: {Properties.Settings.Default.ImageMagickPath}");
-                Application.Current.Shutdown();
-            }
-
-
+            this.DataContext = _viewModel;
         }
+
+        private void DropBorder_OnDragEnter(object sender, DragEventArgs e)
+        {
+            DragDropHelper.SetIsDragOver((DependencyObject)sender, true);
+        }
+
+        private void DropBorder_OnPreviewDragLeave(object sender, DragEventArgs e)
+        {
+            DragDropHelper.SetIsDragOver((DependencyObject)sender, false);
+        }
+
         //todo: Dodać sprawdzanie wymiarów i wyrzucić bląd jeśli są one różne - funkcja optimize (co ona robi?)
         private async void UIElement_OnDrop(object sender, DragEventArgs e)
         {
             try
             {
-                Working.Visibility = Visibility.Visible;
-                TextBlock.Visibility = Visibility.Collapsed;
+                ShowProgressBar();
 
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, true);
                 List<FileInfo> specifiedFiles = GetAllFilesFromDirOrPath(files)
@@ -63,17 +67,24 @@ namespace GifMaker2
                 await task;
 
 
-                Working.Visibility = Visibility.Collapsed;
-                TextBlock.Text = "Done. Drop more files!";
-                TextBlock.Visibility = Visibility.Visible;
+                HideProgressBar();
             }
             catch(Exception exception)
             {
                 MessageBox.Show(exception.Message);
-                Working.Visibility = Visibility.Collapsed;
-                TextBlock.Text = "Drop some files here";
-                TextBlock.Visibility = Visibility.Visible;
+                HideProgressBar();
             }
+        }
+
+        private void HideProgressBar()
+        {
+            _viewModel.SetReady();
+            _viewModel.InfoText = "Done. Drop more files!";
+        }
+
+        private void ShowProgressBar()
+        {
+          _viewModel.SetBusy();
         }
 
         private void Render(string[] files, string outputFilename)
@@ -133,5 +144,21 @@ namespace GifMaker2
         }
 
        
+    }
+
+    public class DragDropHelper
+    {
+        public static readonly DependencyProperty IsDragOverProperty = DependencyProperty.RegisterAttached(
+            "IsDragOver", typeof(bool), typeof(DragDropHelper), new PropertyMetadata(default(bool)));
+
+        public static void SetIsDragOver(DependencyObject element, bool value)
+        {
+            element.SetValue(IsDragOverProperty, value);
+        }
+
+        public static bool GetIsDragOver(DependencyObject element)
+        {
+            return (bool)element.GetValue(IsDragOverProperty);
+        }
     }
 }
