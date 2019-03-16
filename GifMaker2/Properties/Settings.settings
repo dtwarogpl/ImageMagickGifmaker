@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GifMaker2.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ImageMagickPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Program Files\ImageMagick-7.0.6-Q16\magick.exe</Value>
-    </Setting>
     <Setting Name="FrameDelay" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>

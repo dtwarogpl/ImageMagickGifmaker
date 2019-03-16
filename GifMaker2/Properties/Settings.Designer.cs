@@ -25,18 +25,6 @@ namespace GifMaker2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\ImageMagick-7.0.6-Q16\\magick.exe")]
-        public string ImageMagickPath {
-            get {
-                return ((string)(this["ImageMagickPath"]));
-            }
-            set {
-                this["ImageMagickPath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
         public int FrameDelay {
             get {
