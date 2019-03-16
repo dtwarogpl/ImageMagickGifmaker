@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-
+using ImageMagick;
 
 namespace GifMaker2
 {
@@ -35,7 +35,7 @@ namespace GifMaker2
 
 
         }
-
+        //todo: Dodać sprawdzanie wymiarów i wyrzucić bląd jeśli są one różne - funkcja optimize (co ona robi?)
         private async void UIElement_OnDrop(object sender, DragEventArgs e)
         {
             try
@@ -57,14 +57,11 @@ namespace GifMaker2
 
                 var outputFilename = Path.Combine(directory, $"{specifiedFiles.Last() .Name}_({specifiedFiles.Count})_.gif");
 
-                string command =
-                        $"convert -loop 0 -delay {_settings.FrameDelay} {string.Join(" ", specifiedFiles.Select(x => "\"" + x.FullName + "\""))} " +
-                        $"-resize {_settings.Resize} -quality {_settings.Quality}% -fuzz {_settings.Fuzz}% +dither -layers Optimize \"{outputFilename}\"";
 
-
-                Task task = Task.Run(() => RunMagickCmd(command));
-                //wait for it to end without blocking the main thread
+                Task task = Task.Run(() => Render(files, outputFilename));
+              
                 await task;
+
 
                 Working.Visibility = Visibility.Collapsed;
                 TextBlock.Text = "Done. Drop more files!";
@@ -79,6 +76,36 @@ namespace GifMaker2
             }
         }
 
+        private void Render(string[] files, string outputFilename)
+        {
+            using(MagickImageCollection collection = new MagickImageCollection())
+            {
+                for(var index = 0; index < files.Length; index++)
+                {
+                    var file = files[index];
+                    collection.Add(file);
+                    collection[index]
+                            .AnimationDelay = _settings.FrameDelay;
+                    collection[index]
+                            .Quality = Int32.Parse(_settings.Quality);
+                    collection[index]
+                            .ColorFuzz = new Percentage(Int32.Parse(_settings.Fuzz));
+                    collection[index]
+                            .Resize(new MagickGeometry(_settings.Resize));
+                }
+
+                QuantizeSettings settings = new QuantizeSettings();
+                settings.Colors = 256;
+                collection.Quantize(settings);
+                //collection.Optimize();
+
+                // Optionally optimize the images (images should have the same size).
+                collection.Optimize();
+
+                collection.Write(outputFilename);
+            }
+            // the code that you want to measure comes here
+        }
 
         private  List<string> GetAllFilesFromDirOrPath(string[] paths)
         {
@@ -105,33 +132,6 @@ namespace GifMaker2
             return specifiedFiles;
         }
 
-        public void RunMagickCmd(string arguments)
-        {
-            Process process = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo
-                                         {
-                                             RedirectStandardError = true,
-                                             CreateNoWindow = true,
-                                             UseShellExecute = false,
-                                             WindowStyle = ProcessWindowStyle.Hidden,
-                                             FileName = Path.Combine(Properties.Settings.Default.ImageMagickPath),
-                                             Arguments = arguments
-                                         };
-            //  startInfo.Arguments.Replace(@" \", "");
-            process.StartInfo = startInfo;
-            process.Start();
-            string errorsMsg = process.StandardError.ReadToEnd();
-            process.WaitForExit();
-
-            if (!string.IsNullOrEmpty(errorsMsg))
-            {
-                if (errorsMsg.Contains("warning/tiff.c/TIFFWarnings/925"))
-                {
-                    return;
-                }
-
-                throw new Exception(errorsMsg);
-            }
-        }
+       
     }
 }

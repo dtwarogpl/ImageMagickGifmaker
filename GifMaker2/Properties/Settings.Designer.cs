@@ -61,7 +61,7 @@ namespace GifMaker2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("80")]
+        [global::System.Configuration.DefaultSettingValueAttribute("70")]
         public string Quality {
             get {
                 return ((string)(this["Quality"]));

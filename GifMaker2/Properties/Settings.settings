@@ -12,7 +12,7 @@
       <Value Profile="(Default)">1200x</Value>
     </Setting>
     <Setting Name="Quality" Type="System.String" Scope="User">
-      <Value Profile="(Default)">80</Value>
+      <Value Profile="(Default)">70</Value>
     </Setting>
     <Setting Name="Fuzz" Type="System.String" Scope="User">
       <Value Profile="(Default)">2</Value>
