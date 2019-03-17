@@ -23,10 +23,11 @@ namespace GifMaker2
     public partial class MainWindow : Window
     {
         private readonly Properties.Settings _settings = Properties.Settings.Default;
-        private readonly ViewModel _viewModel = new ViewModel();
+        private readonly ViewModel _viewModel;
         public MainWindow()
         {
             InitializeComponent();
+            _viewModel = new ViewModel(_settings);
             this.DataContext = _viewModel;
         }
 
@@ -41,6 +42,7 @@ namespace GifMaker2
         }
 
         //todo: Dodać sprawdzanie wymiarów i wyrzucić bląd jeśli są one różne - funkcja optimize (co ona robi?)
+        //todo: obsługa błędów i komunikatów o błędach 
         private async void UIElement_OnDrop(object sender, DragEventArgs e)
         {
             try
@@ -98,9 +100,9 @@ namespace GifMaker2
                     collection[index]
                             .AnimationDelay = _settings.FrameDelay;
                     collection[index]
-                            .Quality = Int32.Parse(_settings.Quality);
+                            .Quality = _settings.Quality;
                     collection[index]
-                            .ColorFuzz = new Percentage(Int32.Parse(_settings.Fuzz));
+                            .ColorFuzz = new Percentage(_settings.Fuzz);
                     collection[index]
                             .Resize(new MagickGeometry(_settings.Resize));
                 }
@@ -146,6 +148,34 @@ namespace GifMaker2
         private void Slider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             ((Slider)sender).Value = Math.Round(((Slider)sender).Value, 0);
+        }
+
+        private void AppbarSettings_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _viewModel.SettingsPanelVisibility = Visibility.Visible;
+        }
+
+        private void SaveSettings(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                _viewModel.SettingsPanelVisibility = Visibility.Collapsed;
+                _viewModel.UpdateSettings();
+            }
+            catch(Exception exception) { MessageBox.Show(exception.Message); }
+
+        }
+
+        private void ResetSettings(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                _viewModel.ResetSettings();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 

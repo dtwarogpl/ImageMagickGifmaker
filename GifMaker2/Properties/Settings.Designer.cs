@@ -12,8 +12,7 @@ namespace GifMaker2.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")] public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
@@ -50,9 +49,9 @@ namespace GifMaker2.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("70")]
-        public string Quality {
+        public int Quality {
             get {
-                return ((string)(this["Quality"]));
+                return ((int)(this["Quality"]));
             }
             set {
                 this["Quality"] = value;
@@ -62,9 +61,9 @@ namespace GifMaker2.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
-        public string Fuzz {
+        public int Fuzz {
             get {
-                return ((string)(this["Fuzz"]));
+                return ((int)(this["Fuzz"]));
             }
             set {
                 this["Fuzz"] = value;
