@@ -143,7 +143,10 @@ namespace GifMaker2
             return specifiedFiles;
         }
 
-       
+        private void Slider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ((Slider)sender).Value = Math.Round(((Slider)sender).Value, 0);
+        }
     }
 
     public class DragDropHelper
