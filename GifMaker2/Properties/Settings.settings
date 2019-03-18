@@ -5,14 +5,8 @@
     <Setting Name="FrameDelay" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
-    <Setting Name="Resize" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1200x</Value>
-    </Setting>
-    <Setting Name="Quality" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">70</Value>
-    </Setting>
-    <Setting Name="Fuzz" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">2</Value>
+    <Setting Name="ResizeGeometry" Type="System.String" Scope="User">
+      <Value Profile="(Default)">x1000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

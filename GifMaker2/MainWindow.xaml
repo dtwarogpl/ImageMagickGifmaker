@@ -185,31 +185,14 @@
                     <Slider Name="FrameDelaySlider" Value="{Binding FrameDelay, Mode=TwoWay}" Style="{StaticResource Horizontal_Slider}" ValueChanged="Slider_OnValueChanged"></Slider>
                     <TextBlock>Time between the frames of the gif</TextBlock>
                </StackPanel>
-               <StackPanel Orientation="Vertical" Style="{StaticResource SettingItem}">
-                   <StackPanel Orientation="Horizontal">
-
-                        <TextBlock Style="{StaticResource SettingTitle}" Text="{Binding ElementName=QualitySlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat=Quality: {0}%}"></TextBlock>
-                   
-                   </StackPanel>
-
-                    <Slider Name="QualitySlider" Value="{Binding Quality, Mode=TwoWay}" Style="{StaticResource Horizontal_Slider}" ValueChanged="Slider_OnValueChanged"></Slider>
-                   <TextBlock>Output file compression level</TextBlock>
-                </StackPanel>
-               <StackPanel Orientation="Vertical" Style="{StaticResource SettingItem}">
-                    <StackPanel Orientation="Horizontal">
-                       
-                        <TextBlock Style="{StaticResource SettingTitle}" Text="{Binding ElementName=FuzzSlider, Path=Value, UpdateSourceTrigger=PropertyChanged,StringFormat=Fuzz: {0}%}"></TextBlock>
-                    </StackPanel>
-                    <Slider  Maximum="100" Name="FuzzSlider" Value="{Binding Fuzz, Mode=TwoWay}"  Style="{StaticResource Horizontal_Slider}"  ValueChanged="Slider_OnValueChanged" />
-                    <TextBlock>A distance within a colorspace for color compression</TextBlock>
-                </StackPanel>
+           
                
                <StackPanel Orientation="Vertical" Style="{StaticResource SettingItem}">
                     <StackPanel Orientation="Horizontal">
                        
                         <TextBlock Style="{StaticResource SettingTitle}" Text="Resize geometry" Margin="0,0,0,0"></TextBlock>
                     </StackPanel>
-                    <TextBox>x1200</TextBox>
+                    <TextBox Text="{Binding ResizeGeometry,Mode=TwoWay}"></TextBox>
                     <TextBlock FontSize="11">width --Width given, auto height</TextBlock>
                     <TextBlock FontSize="11">xheight -- Height given, auto width</TextBlock>
                     <TextBlock FontSize="11">widthxheight -- Maximum values of height and width.</TextBlock>

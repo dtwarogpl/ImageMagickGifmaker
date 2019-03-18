@@ -98,22 +98,23 @@ namespace GifMaker2
                     var file = files[index];
                     collection.Add(file);
                     collection[index]
-                            .AnimationDelay = _settings.FrameDelay;
+                            .AnimationDelay = _viewModel.FrameDelay;
                     collection[index]
-                            .Quality = _settings.Quality;
+                            .ColorFuzz = new Percentage(2);
                     collection[index]
-                            .ColorFuzz = new Percentage(_settings.Fuzz);
-                    collection[index]
-                            .Resize(new MagickGeometry(_settings.Resize));
+                            .Resize(new MagickGeometry(_viewModel.ResizeGeometry));
                 }
 
                 QuantizeSettings settings = new QuantizeSettings();
                 settings.Colors = 256;
+                
                 collection.Quantize(settings);
                 //collection.Optimize();
 
                 // Optionally optimize the images (images should have the same size).
                 collection.Optimize();
+                collection.OptimizePlus();
+                
 
                 collection.Write(outputFilename);
             }

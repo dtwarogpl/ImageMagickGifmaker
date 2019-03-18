@@ -13,8 +13,8 @@ namespace GifMaker2
         
         private string _infoText;
         private Visibility _settingsPanelVisibility = Visibility.Collapsed;
-        private int _fuzz;
-        private int _quality;
+     
+      
         private int _frameDelay;
         private string _resizeGeometry;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -42,9 +42,9 @@ namespace GifMaker2
         {
             Settings = settings;
             FrameDelay = Settings.FrameDelay;
-            Fuzz = Settings.Fuzz;
-            ResizeGeometry = Settings.Resize;
-            Quality = Settings.Quality;
+        
+            ResizeGeometry = Settings.ResizeGeometry;
+        
         }
 
         private void Init()
@@ -55,31 +55,9 @@ namespace GifMaker2
             InfoText = "Drop files here";
         }
 
-        public int Fuzz
-        {
-            get => _fuzz;
-            set
-            {
-                if(value == _fuzz) return;
+    
 
-                _fuzz = value;
-                OnPropertyChanged();
-               
-            }
-        }
-
-        public int Quality
-        {
-            get => _quality;
-            set
-            {
-                if(value == _quality) return;
-
-                _quality = value;
-                OnPropertyChanged();
-              
-            }
-        }
+      
         public int FrameDelay
         {
             get => _frameDelay;
@@ -109,9 +87,7 @@ namespace GifMaker2
         public void UpdateSettings()
         {
             Settings.FrameDelay = FrameDelay;
-            Settings.Fuzz = Fuzz;
-            Settings.Quality = Quality;
-            Settings.Resize = ResizeGeometry;
+            Settings.ResizeGeometry = ResizeGeometry;
             Settings.Save();
         }
 

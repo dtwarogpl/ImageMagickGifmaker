@@ -36,37 +36,13 @@ namespace GifMaker2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1200x")]
-        public string Resize {
+        [global::System.Configuration.DefaultSettingValueAttribute("x1000")]
+        public string ResizeGeometry {
             get {
-                return ((string)(this["Resize"]));
+                return ((string)(this["ResizeGeometry"]));
             }
             set {
-                this["Resize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("70")]
-        public int Quality {
-            get {
-                return ((int)(this["Quality"]));
-            }
-            set {
-                this["Quality"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2")]
-        public int Fuzz {
-            get {
-                return ((int)(this["Fuzz"]));
-            }
-            set {
-                this["Fuzz"] = value;
+                this["ResizeGeometry"] = value;
             }
         }
     }
